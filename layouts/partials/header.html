@@ -1,36 +1,34 @@
-{{- $params := .Site.Params }}
-{{- $centerLogo := $params.centerLogo }}
-{{ $logo := $params.logo }}
-<header class="nav_header" >
+{{- $params := .Site.Params }} {{- $centerLogo := $params.centerLogo }} {{ $logo
+:= $params.logo }}
+<header class="nav_header">
   <nav class="nav">
-    {{- if $centerLogo }}
-      {{- partialCached "logo" (dict "logo" $logo "class" "nav_hide") }}
-    {{- else }}
-      {{- partialCached "logo" (dict "logo" $logo) }}
+    {{- if $centerLogo }} {{- partialCached "logo" (dict "logo" $logo "class"
+    "nav_hide") }} {{- else }} {{- partialCached "logo" (dict "logo" $logo) }}
     {{- end }}
-    <div class='nav_body nav_body_{{ default "left" $params.mobileNavigation }}'>
-      {{ $context := . }}
-      {{ $menuData := .Site.Data.menu }}
-      {{ with $menuData }}
-        {{ partial "nav" (dict "context" $context "menu" $menuData) }}
-      {{- else }}
-        {{ partial "nav" (dict "context" . "menu" .Site.Menus.main) }}
-      {{- end }}
-      {{ if .Site.IsMultiLingual }}
+    <div
+      class='nav_body nav_body_{{ default $params.mobileNavigation "right" }}'
+    >
+      {{ $context := . }} {{ $menuData := .Site.Data.menu }} {{ with $menuData
+      }} {{ partial "nav" (dict "context" $context "menu" $menuData) }} {{- else
+      }} {{ partial "nav" (dict "context" . "menu" .Site.Menus.main) }} {{- end
+      }} {{ if .Site.IsMultiLingual }}
       <div class="nav_parent">
-        <a href="#" class="nav_item">{{ $params.languageMenuName }}</a>
+        <a href="#" class="nav_item">
+          <svg class="icon" style="width: 1.5rem; height: 1.5rem">
+            <use xlink:href="#globe"></use>
+          </svg>
+        </a>
         <div class="nav_sub">
           <span class="nav_child"></span>
           {{ range .Site.Home.AllTranslations }}
-          <a href="{{ .Permalink }}" class="nav_child nav_item">{{ .Language.LanguageName }}</a>
+          <a href="{{ .Permalink }}" class="nav_child nav_item"
+            >{{ .Language.LanguageName }}</a
+          >
           {{ end }}
         </div>
       </div>
-      {{- end }}
-      {{- if $centerLogo }}
-        {{- partial "logo" (dict "logo" $logo "class" "nav_center") }}
-      {{- end }}
-      {{- partialCached "follow" . }}
+      {{- end }} {{- if $centerLogo }} {{- partial "logo" (dict "logo" $logo
+      "class" "nav_center") }} {{- end }} {{- partialCached "follow" . }}
     </div>
   </nav>
 </header>
