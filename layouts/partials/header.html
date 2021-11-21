@@ -11,7 +11,9 @@
       {{ $context := . }} {{ $menuData := .Site.Data.menu }} {{ with $menuData
       }} {{ partial "nav" (dict "context" $context "menu" $menuData) }} {{- else
       }} {{ partial "nav" (dict "context" . "menu" .Site.Menus.main) }} {{- end
-      }} {{ if .Site.IsMultiLingual }}
+      }}
+      <!-- Banyak Bahasa -->
+      {{ if .Site.IsMultiLingual }}
       <div class="nav_parent">
         <a href="#" class="nav_item">
           <svg class="icon" style="width: 1.5rem; height: 1.5rem">
